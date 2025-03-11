@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from skimage.color import rgb2hsv
 from PIL import Image
-from numpy import asanyarray
 import numpy as np
 import os
 
@@ -32,7 +31,7 @@ if __name__ == "__main__":
     imgs = []
     for name in imageNames:
         rgb_img = Image.open(name)
-        rgb_img = asanyarray(rgb_img)
+        rgb_img = np.asanyarray(rgb_img)
         rgb_img = rgb_img[:, :, 0:3]
 
         hsv_img = rgb2hsv(rgb_img)
@@ -52,6 +51,4 @@ if __name__ == "__main__":
     for i in range(3):
         for j in range(3):
             axis[i, j].imshow(img_grid[i, j])
-    
-
     plt.show()
