@@ -39,12 +39,14 @@ if __name__ == "__main__":
         hsv_img = rgb2hsv(rgb_img)
         hue_img = hsv_img[:, :, 0]
         value_img = hsv_img[:, :, 2]
+        
 
         mask = (hue_img >= hue_threshold) & (value_img >= value_threshold)
-        masked_img = np.zeros_like(hue_img)
-        masked_img[mask] = hue_img[mask]
-        imgs.append(masked_img)
-    
+        # create the mask
+        masked_rgb_img = np.copy(rgb_img)
+        masked_rgb_img[~mask] = 0
+        imgs.append(masked_rgb_img)
+        
     img_arr = np.array(imgs)
     img_grid = img_arr.reshape(3, 3, *img_arr.shape[1:])
 
